@@ -14,8 +14,10 @@ int _height = 180;
 int _weight = 75;
 int _age = 23;
 
-const activeColor = Color(0xFF00838F);
+const activeColor = Colors.red;
 const inactiveColor = Color(0xFF616161);
+Color maleCardColor = inactiveColor;
+Color femaleCardColor = inactiveColor;
 
 void main() {
   runApp(const MyApp());
@@ -33,26 +35,27 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
 
 
-  Color maleCardColor = inactiveColor;
-  Color femaleCardColor = inactiveColor;
 
   void cardChangeColor(int genderType){
-        if(genderType == 1){
-          if(maleCardColor == inactiveColor){
-            maleCardColor = activeColor;
-            femaleCardColor = inactiveColor;
-          }else{
-            maleCardColor = inactiveColor;
+        setState(() {
+          if(genderType == 1){
+            if(maleCardColor == inactiveColor){
+              maleCardColor = activeColor;
+              femaleCardColor = inactiveColor;
+            }else{
+              maleCardColor = inactiveColor;
+            }
           }
-        }
-        if(genderType == 2){
-          if(femaleCardColor == inactiveColor){
-            femaleCardColor = activeColor;
-            maleCardColor = inactiveColor;
-          }else {
-            femaleCardColor = inactiveColor;
+          if(genderType == 2){
+            if(femaleCardColor == inactiveColor){
+              femaleCardColor = activeColor;
+              maleCardColor = inactiveColor;
+            }else {
+              femaleCardColor = inactiveColor;
+            }
           }
-        }
+        });
+
   }
 
   @override
@@ -81,28 +84,28 @@ class _MyAppState extends State<MyApp> {
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
-                            cardChangeColor(1);
-                        });
+                          print("male is pressed");
+                          cardChangeColor(1);
+
                       },
                       child: reusableContainer(
                         cardChild: iconwidget(
                           reusableIcon: FontAwesomeIcons.mars,
                           iconlabel: 'Male',
                         ),
-                        backGroundColor: inactiveColor,
+                        backGroundColor: maleCardColor,
                       ),
                     ),
                   ),
                   Expanded(
                     child: GestureDetector(
                       onTap: () {
-                        setState(() {
+                          print("Female is pressed");
                           cardChangeColor(2);
-                        });
+
                       },
                       child: reusableContainer(
-                        backGroundColor: inactiveColor,
+                        backGroundColor: femaleCardColor,
                         cardChild: iconwidget(
                           reusableIcon: FontAwesomeIcons.venus,
                           iconlabel: 'Female',
