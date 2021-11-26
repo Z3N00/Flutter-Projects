@@ -1,3 +1,4 @@
+import 'package:bmi_calculator/result.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -20,7 +21,7 @@ Color maleCardColor = inactiveColor;
 Color femaleCardColor = inactiveColor;
 
 void main() {
-  runApp(const MyApp());
+  runApp(const MaterialApp(home: MyApp()));
 }
 
 
@@ -268,20 +269,24 @@ class _MyAppState extends State<MyApp> {
                 ),
               ),
             ),
-            Container(
-              margin: const EdgeInsets.only(top: 10.0),
-              color: Colors.red,
-              height: 80.0,
-              width: double.infinity,
-              child: const Center(
-                child: Text("Calculate", style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 30.0,
-                ),
-                  textAlign: TextAlign.center,
+            Center(
+                child: MaterialButton(
+
+                  height: 60.0,
+                  minWidth: double.infinity,
+                  color: activeColor,
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const result()));
+                  },
+                  child: const Text("Calculate", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 30.0,
+                  ),
+                    textAlign: TextAlign.center,
+                  ),
                 ),
               ),
-            ),
+
           ],
         ),
       ),
